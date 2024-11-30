@@ -48,3 +48,39 @@ R1(config-if)#service-policy output ip4-traff
 
 
 [Конфигурация маршрутизатора R1](https://github.com/mezhibo/Policing-shaping/blob/6e8d0918c842e3d5422e6e9232b0aa8b89a979ab/IMG/router1.txt)
+
+
+
+
+**Задание 2.**
+
+1. Установить себе на ПК утилиту Iperf3.
+
+2. Проверить доступную по TCP и UDP полосу до публичного iperf3 сервера speedtest.uztelecom.uz
+
+3. Тестирование проводить на протяжении 30 секунд.
+
+
+
+Отправьте скриншот с итоговыми результатами измерений для каждого протокола.
+
+
+
+**Решение 2**
+
+
+Через виртуалбокс создал виртуалку на ubuntu 22
+
+![Image alt](https://github.com/mezhibo/Policing-shaping/blob/646539bb3275614592c9f3138b853a2734f2b9b0/IMG/4.jpg)
+
+
+Проверка доступной полосы по TCP iperf3 -c speedtest.uztelecom.uz -t 30
+
+
+![Image alt](https://github.com/mezhibo/Policing-shaping/blob/646539bb3275614592c9f3138b853a2734f2b9b0/IMG/5.jpg)
+
+
+
+Проверка доступной полосы по UDP iperf3 -c speedtest.uztelecom.uz -u -b 1G -t 30
+
+![Image alt](https://github.com/mezhibo/Policing-shaping/blob/646539bb3275614592c9f3138b853a2734f2b9b0/IMG/6.jpg)
