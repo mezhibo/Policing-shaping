@@ -1,0 +1,124 @@
+
+!
+! Last configuration change at 16:48:14 UTC Sat Aug 31 2024
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+!
+class-map match-any ip4-traff
+ match access-group name ip4-traff
+!
+policy-map ip4-traff
+ class ip4-traff
+  police cir 10000000 bc 750000 conform-action transmit  exceed-action drop 
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ no shutdown
+ ip address 10.1.1.2 255.255.255.252
+ service-policy input ip4-traff
+ service-policy output ip4-traff
+!
+interface Ethernet0/1
+ no shutdown
+ ip address 192.168.200.1 255.255.255.0
+!
+interface Ethernet0/2
+ no shutdown
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ no shutdown
+ no ip address
+ shutdown
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 192.168.1.0 255.255.255.0 10.1.1.1
+!
+ip access-list extended ip4-traff
+ permit ip host 192.168.200.200 any
+ permit ip any host 192.168.200.200
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+!
+end
